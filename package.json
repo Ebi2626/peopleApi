@@ -1,0 +1,18 @@
+{
+  "name": "people-api",
+  "version": "1.0.0",
+  "description": "Simple rest API with list of people with their names and lastNames",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "node-sass -w src/style -o public/css/"
+  },
+  "author": "Edwin Harmata",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "node-sass": "^4.13.1"
+  }
+}

@@ -1,0 +1,135 @@
+@import "./reset.scss";
+@import "./variables.scss";
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
+body {
+  background-color: $bg-dark;
+  color: $font-light;
+  font-family: "Montserrat", Helvetica, sans-serif;
+}
+.container {
+  min-height: calc(100vh - 100px);
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  &__title {
+    font-size: $font-xxl;
+    letter-spacing: 2px;
+    margin: $spacing-xxl 0;
+    color: $highlight-light;
+  }
+  &__description {
+    max-width: 800px;
+    font-size: $font-lg;
+    letter-spacing: 1.75px;
+    line-height: calc($font-lg + 10px);
+    text-align: justify;
+  }
+  &__button {
+    display: block;
+    box-shadow: none;
+    border: none;
+    font-size: $font-lg;
+    border-radius: $rounded-corner;
+    margin: $spacing-xl auto;
+    padding: $spacing-sm $spacing-xxl;
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+.main {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  &__title {
+    text-align: center;
+    font-size: $font-xl;
+    margin-bottom: $spacing-lg;
+    color: $highlight-light;
+  }
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  &__list {
+    list-style-type: disc;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: $font-lg;
+    margin-bottom: $spacing-xl;
+  }
+  &__items {
+    margin: $spacing-sm;
+  }
+  .commands {
+    margin-top: $spacing-lg;
+    &__title {
+      text-align: center;
+      font-size: $font-lg;
+      color: $highlight-light;
+      margin-bottom: $spacing-lg;
+    }
+    &__list {
+      list-style-type: none;
+    }
+    &__item {
+      margin: $spacing-md 0;
+    }
+    &__method {
+      text-align: center;
+      font-size: $font-xl;
+    }
+    &__descrpition {
+      font-size: $font-md;
+      margin: $spacing-md 0;
+    }
+    &__code {
+      background-color: $bg-light;
+      color: black;
+      padding: $spacing-md 0;
+      font-size: $font-lg;
+      text-align: center;
+      &--left {
+        background-color: $bg-light;
+        color: black;
+        padding: $spacing-md 0;
+        font-size: $font-lg;
+        text-align: left;
+      }
+    }
+  }
+}
+.footer {
+  &__box {
+    background-color: $highlight-dark;
+    color: $font-light;
+    padding: $spacing-lg;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &__paragraph {
+    margin: $spacing-xs 0;
+    letter-spacing: 1.5px;
+    & > a {
+      color: $highlight-light;
+      transition: color 0.2s ease-in-out;
+      &:hover {
+        color: $font-dark;
+      }
+    }
+    &:last-child {
+      margin: $spacing-lg 0;
+      text-align: center;
+    }
+  }
+}
