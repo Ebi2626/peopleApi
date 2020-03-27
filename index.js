@@ -28,6 +28,6 @@ app.get("/o-aplikacji", function(req, res) {
   });
 });
 
-app.listen(8080, function() {
-  console.log("Serwer został uruchomiony pod adresem http://localhost:8080");
+app.listen(process.env.PORT || 80, function() {
+  console.log("Serwer został uruchomiony pod adresem https://localhost:80");
 });

@@ -4,6 +4,7 @@
   "description": "Simple rest API with list of people with their names and lastNames",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "sass": "node-sass -w src/style -o public/css/"
   },
