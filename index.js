@@ -17,14 +17,22 @@ app.get("/", function(req, res) {
   res.render("home", {
     main: true,
     title: "People API",
-    users: users.list()
+    users: users.list(),
+    next:
+      req.protocol + "://" + req.get("host") + req.originalUrl + "o-aplikacji"
   });
 });
 app.get("/o-aplikacji", function(req, res) {
+  const beforeUrl = (
+    req.protocol +
+    "://" +
+    req.get("host") +
+    req.originalUrl
+  ).replace("/o-aplikacji", "");
   res.render("o-aplikacji", {
     oAplikacji: true,
     title: "O aplikacji",
-    users: []
+    before: beforeUrl
   });
 });
 

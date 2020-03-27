@@ -85,6 +85,20 @@ body {
       margin: $spacing-sm 0;
     }
   }
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    font-size: $font-lg;
+    color: $highlight-dark;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      color: $highlight-light;
+    }
+    &--icon {
+      width: 30px;
+      height: auto;
+    }
+  }
 }
 .footer {
   &__box {
