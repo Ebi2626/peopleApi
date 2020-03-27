@@ -6,7 +6,7 @@ Simple REST API with people list
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-This API can show you simple home page with list of people and return json objects with singular person or whole array with people.
+This API can show you simple website with list of people and return json objects with singular person or whole array with people.
 
 - Getting informations (GET) - read from CRUD acronym
 
@@ -53,7 +53,7 @@ DELETE method: /api/user/5 - will delete user with given id
 What things you need to install the software and how to install them
 
 - [Node.js](https://nodejs.org/en/)
-- [This repository]()
+- [This repository](https://github.com/Ebi2626/peopleApi/)
 
 ### Installing
 
@@ -83,9 +83,9 @@ A step by step series of examples that tell you how to get a development env run
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+We use [SemVer](http://semver.org/) for versioning. 
 
-## Authors
+## Author
 
 **Edwin Harmata**
 
