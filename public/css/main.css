@@ -12,6 +12,9 @@ html {
 body {
   font-size: 1.4rem; }
 
+a {
+  text-decoration: none; }
+
 body {
   background-color: #56565f;
   color: #f5f5f5;

@@ -15,8 +15,16 @@ app.use("/api", api);
 
 app.get("/", function(req, res) {
   res.render("home", {
+    main: true,
     title: "People API",
     users: users.list()
+  });
+});
+app.get("/o-aplikacji", function(req, res) {
+  res.render("o-aplikacji", {
+    oAplikacji: true,
+    title: "O aplikacji",
+    users: []
   });
 });
 

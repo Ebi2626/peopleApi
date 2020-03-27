@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  font-size: 1.4rem; }
+
+a {
+  text-decoration: none; }
+
+body {
+  background-color: #56565f;
+  color: #f5f5f5;
+  font-family: "Montserrat", Helvetica, sans-serif; }
+
+.container {
+  min-height: calc(100vh - 100px); }
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px; }
+  .header__title {
+    font-size: 3.2rem;
+    letter-spacing: 2px;
+    margin: 40px 0;
+    color: #b1cedf; }
+  .header__description {
+    max-width: 800px;
+    font-size: 2rem;
+    letter-spacing: 1.75px;
+    line-height: calc($font-lg + 10px);
+    text-align: justify; }
+
+.main {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto; }
+  .main .section {
+    margin: 40px 0; }
+    .main .section__head {
+      margin: 15px 0; }
+    .main .section__title {
+      letter-spacing: 1.4px;
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: 15px;
+      color: #b1cedf; }
+    .main .section__subtitle {
+      text-align: center;
+      font-size: 1.6rem; }
+    .main .section__list {
+      list-style-type: none; }
+    .main .section__description {
+      margin: 15px 0;
+      letter-spacing: 0.8px; }
+  .main .item {
+    margin: 15px 0; }
+    .main .item__title {
+      letter-spacing: 1px;
+      font-size: 2rem;
+      margin-bottom: 5px; }
+    .main .item__description {
+      margin-bottom: 15px;
+      letter-spacing: 0.8px; }
+      .main .item__description > a {
+        color: #04050f;
+        transition: all 0.2s ease-in-out; }
+        .main .item__description > a:hover {
+          color: #b1cedf; }
+    .main .item__list {
+      padding: 0 40px; }
+    .main .item__paragraph {
+      letter-spacing: 0.9px;
+      line-height: 20px;
+      margin: 10px 0; }
+
+.footer__box {
+  background-color: #04050f;
+  color: #f5f5f5;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+
+.footer__paragraph {
+  margin: 5px 0;
+  letter-spacing: 1.5px; }
+  .footer__paragraph > a {
+    color: #b1cedf;
+    transition: color 0.2s ease-in-out; }
+    .footer__paragraph > a:hover {
+      color: #656569; }
+  .footer__paragraph:last-child {
+    margin: 20px 0;
+    text-align: center; }

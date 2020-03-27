@@ -1,0 +1,384 @@
+<header class="header">
+
+    <h1 class="header__title">O aplikacji</h1>
+    <div class="header__description">
+        <p>Na tej stronie znajdziesz szczegółowe informacje dotyczące działania aplikacji oraz jej struktury i użytych
+            technologii</p>
+    </div>
+</header>
+<main class="main">
+    <section class="section">
+        <header class="section__head">
+            <h3 class="section__title">Struktura aplikacji</h3>
+            <p class="section__subtitle">W tej sekcji wyjaśniona została struktura folderów wraz z ich zawartością</p>
+        </header>
+        <div class="section__content">
+            <ul class="section__list">
+                <li class="item">
+                    <h4 class="item__title">
+                        Root - folder główny
+                    </h4>
+                    <p class="item__description">
+                        W tym folderze znajdują się tylko pliki o kluczowym znaczeniu dla działania całości aplikacji:
+                    </p>
+                    <ul class="item__list">
+                        <li class="item__paragraph">
+                            index.js - odpowiada za uruchomienie serwera, importuje niezbędne moduły - w tym nasze
+                            własne api
+                        </li>
+                        <li class="item__paragraph">
+                            .gitignore - wyklucza katalog node_modules zawierający niezbędne paczki z repozytorium gita
+                        </li>
+                        <li class="item__paragraph">
+                            package.json - zawiera podstawowe informacje o projekcie, listę niezbędnych dependencji do
+                            zainstalowania projektu oraz prosty skrypt pozwalający na transpilowanie plików scss do css
+                            na żywo
+                        </li>
+                        <li class="item__paragraph">
+                            readme.md - zawiera skrócony opis projektu oraz sposbu jego instalacji w języku angielskim
+                        </li>
+                    </ul>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        Public - folder plików statycznych
+                    </h4>
+                    <p class="item__description">
+                        W tym folderze znajdują się tylko pliki statyczne, które mają być dołączane do odpowiedzi
+                        serwera:
+                    </p>
+                    <ul class="item__list">
+                        <li class="item__paragraph">
+                            katalog css - zawiera pliki css będące efektem transpilacji plików scss z folderu src/style
+                        </li>
+                        <li class="item__paragraph">
+                            katalog fonts - zawiera fonty
+                        </li>
+                    </ul>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        Api - folder zawierający logikę api
+                    </h4>
+                    <p class="item__description">
+                        W tym folderze znajdują się tylko dwa pliki api.js odpowiada za logikę, a package.json, pozwala
+                        na jego domyślny import bez zmiany nazwy na index.js.
+                    </p>
+                    <ul class="item__list">
+                        <li class="item__paragraph">
+                            api.js - importuje funkcje z pliku users/users.js, express'a oraz jego router, a następnie
+                            obsługuje zapytania do api przy pomocy odpowiednich funkcji.
+                            Jest to właściwe miejsce do wprowadzenia zmian, które wiążą się z obsługą konkretnych metod
+                            HTTP.
+                        </li>
+                        <li class="item__paragraph">
+                            package.json - informuje, że głównym plikiem w tym folderze nie jest standardowy "index.js",
+                            a "api.js"
+                        </li>
+                    </ul>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        Users - folder z proto bazą danych oraz plikiem z logiką funkcji wykorzystywanych do obsługi api
+                    </h4>
+                    <p class="item__description">
+                        Pliki z tego folderu umożliwiają funkcjonowanie api, dostarczają jej źródła danych oraz funckji
+                        do obsługi zapytań
+                    </p>
+                    <ul class="item__list">
+                        <li class="item__paragraph">
+                            users.js - zawiera listę prostych funkcji z samoopisowymi nazwami w języku anglieskim, które
+                            odpowiadają za komunikację między treścią zapytań a zawartością prototypu bazy danych.
+                            Eksportują takie metody jak:
+                            - add - odpowiedzialną za dodanie nowego użytkownia z nadaniem nowego ID o numerze kolejnym
+                            niż ostatni w liście
+                            - get - odpowiedzialną za zwrócenie osoby o podanym id
+                            - update - odpowiedzialną za wprowadzenie zmian do usera o podanym ID i zapisanie jej w
+                            pliku proto bazy danych
+                            - delete - odpowiedzialną za usunięcie usera z proto bazy danych
+                            - list - odpowiedzialną za zwrócenie tablicy z wszystimi osobami
+
+                            Wszystkie na danych są wykonywane na kopii zawartości obiektu a dopiero po wykonaniu
+                            operacji, przekształcona kopia nadpisuje zawartość naszej proto bazy danych.
+
+                        </li>
+                        <li class="item__paragraph">
+                            usersDb.json - plik typu JSON zawierający tablicę obiektów zawierający klucze: id, name,
+                            lastName. Tablica to pełna lista osób zwracanych przez API - imituję bazę danych.
+                        </li>
+                        <li class="item__paragraph">
+                            package.json - informuje, że głównym plikiem w tym folderze nie jest standardowy "index.js",
+                            a "users.js
+                        </li>
+                    </ul>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        Views - domyślny folder źródła widoków w silniku handlebars
+                    </h4>
+                    <p class="item__description">
+                        Pliki z tego folderu pozwalają na generowanie stron html, a zarazem pozwalają na wstrzykiwanie
+                        treści oraz instrukcji warunkowych przed wysłaniem ich do użytkownika. Stanowią szablony, które
+                        wypełniamy odpowiednimi danymi w zależności od zapytania klienta oraz zawartości naszego api.
+                    </p>
+                    <ul class="item__list">
+                        <li class="item__paragraph">
+                            katalog layouts - zawiera pliki, które będą formatowały widok całej strony. Pozwalają na
+                            tworzenie złożonych layoutów z prostszych elementów. Domyślnie został ustawiony layout
+                            "main.handlebars", który importuje z folderu "partials" nagłówek i stopkę.
+                        </li>
+                        <li class="item__paragraph">
+                            katalog partials - zawiera fragmenty strony, które możey importować w różnych widokach. W
+                            wypadku tego projektu znajdziemy tam jedynie "header.handlebars" oraz "footer.handlebars",
+                            które są odpowiedzialne za zawartość stopki oraz nagłówka stron.
+                        </li>
+                        <li class="item__paragraph">
+                            home.handlebars - plik zawierający zawartość widoku strony głównej
+                        </li>
+                        <li class="item__paragraph">
+                            o-aplikacji.handlebars - plik zawierający zawartość strony "o-aplikacji" - czyli stronę,
+                            którą właśnie czytasz
+                        </li>
+                    </ul>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        node_modules </h4>
+                    <p class="item__description">
+                        Folder zawierający paczki niezbęde do poprawnego funkcjonowania aplikacji.
+                        Powstaje po wprowadzeniu komendy 'npm install' w trakcie instalacji projektu.
+                    </p>
+            </ul>
+        </div>
+    </section>
+    <section class="section">
+        <header class="section__head">
+            <h3 class="section__title">Technologie</h3>
+            <p class="section__subtitle">W tej sekcji wymienione zostały stosowane technologie.</p>
+        </header>
+        <div class="section__content">
+            <ul class="section__list">
+                <li class="item">
+                    <h4 class="item__title">
+                        Node.js
+                    </h4>
+                    <p class="item__description">
+                        <a href="https://nodejs.org/en/">Node.js</a> - to platforma umożliwająca uruchomienie kodu
+                        Javascript poza
+                        środowiskiem przeglądarki.
+                        Dzięki niej możliwe jest wykonywanie zarówno operacji na plikach, jak i budowy oraz obsługi
+                        serwerów w JavaScripcie.
+                    </p>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        JavaScript
+                    </h4>
+                    <p class="item__description">
+                        <a href="https://www.ecma-international.org/publications/standards/Ecma-262.htm">Javascript</a>
+                        - to skryptowy język, który w przeszłości służył wyłącznie do
+                        tworzenia
+                        interaktywnych
+                        funkcjonalości w środowisku przeglądarek internetowych. Obecnie dzięki Node.js moża tworzyć przy
+                        jego pomocy aplikacje takie jak ta.
+                    </p>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        Express.js
+                    </h4>
+                    <p class="item__description">
+                        <a href="https://expressjs.com/">Express.js</a> - to popularny minimalistyczny framework webowy,
+                        który pozwala na
+                        łatwą obsługę
+                        zapytań http
+                        (routing) i integrację z silnikami widoków (jak zastosowany handlebars) oraz umieszczanie
+                        middleware uruchamianych przed wysłaniem zapytania/odpowiedzi na serwer.
+                    </p>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        SASS(SCSS)
+                    </h4>
+                    <p class="item__description">
+                        <a href="https://sass-lang.com/">SASS</a> - to preprocessor css, który umożliwia tworzenie
+                        zmiennych, mixinów oraz
+                        zagnieżdżonych
+                        stylów. Ułatwia i przyspiesza pracę ze stylami, ale wymaga kompilacji, ponieważ pliki
+                        preprocesora nie są zrozumiałe dla przeglądarek. W tym projekcie kompilacją zajmuje się skrypt
+                        uruchamiany komendą 'npm run sass'
+                    </p>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        Handlebars
+                    </h4>
+                    <p class="item__description">
+                        <a href="https://github.com/express-handlebars/express-handlebars">Express-handlebars</a> - to
+                        silnik widoków, który pozwala na tworzenie szablonów
+                        przekształcanych w
+                        statyczne pliki html. Dzięki swej prostocie jest wygodny do budowania prostych aplikacji, jak
+                        ta. Umożliwia na zagnieżdżanie w kodzie html instrukcji warunkowych oraz pętli.
+                    </p>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        NPM
+                    </h4>
+                    <p class="item__description">
+                        <a href="https://www.npmjs.com/">NPM</a> - to menadżer pakietów, który pozwala programistom
+                        dzielić się i korzystać z
+                        kodu
+                        udostępnionego przez innych. W tym projekcie zainstalowe są dziesiątki modułów, które
+                        umożliwiają jego sprawne funkcjonowanie bez przysłowiowego "wynajdywania koła na nowo".
+                    </p>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        Git
+                    </h4>
+                    <p class="item__description">
+                        <a href="https://git-scm.com/">Git</a> - to system kontroli wersji umożliwiający wygondą i
+                        prostą pracę nad
+                        projektem oraz jego
+                        wersjonowanie. W tym projekcie zdalne repozytorium umieszczone zostało na portalu github, który
+                        idealnie współpracuje z gitem.
+                    </p>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        JSON
+                    </h4>
+                    <p class="item__description">
+                        <a href="https://www.json.org/json-en.html">JSON</a> - to najwygodniejszy i obecnie
+                        najpopularniejszy format przechowywania
+                        danych na potrzeby
+                        pracy w sieci web. Dzięki jego podobieństwu do obiektów w JavaScripcie, jest niezwykle prosty do
+                        parsowania i stosowania w programach.
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="section">
+        <header class="section__head">
+            <h3 class="section__title">Cel stworzenia aplikacji</h3>
+            <p class="section__subtitle">W tej sekcji wyjaśniona zostały powody pracy nad projektem oraz jego możliwe
+                zastosowanie.</p>
+        </header>
+        <div class="section__content">
+            <ul class="section__list">
+                <li class="item">
+                    <h4 class="item__title">
+                        Nauka
+                    </h4>
+                    <p class="item__description">
+                        Ten projekt został powołany do życia w celach edukacyjnych. Po przerobieniu wielu kursów online
+                        chciałem sprawdzić w jaki sposób można zastosować nabytą wiedzę w praktyce i postanowiłe
+                        stworzyć to proste API. Dzięki niemu zrozumiałem w jaki sposób pracuje się stosując Javascrip po
+                        stronie backendowej i w jaki sposób można rozwiązywać podstawowe problemy, które są obce
+                        frontendowcom.
+                    </p>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        Szablon
+                    </h4>
+                    <p class="item__description">
+                        Dzięki prostocie konstrukcji oraz dokładnemu objaśnieniu zawartemu na tej stronie, ten projekt
+                        świetnie nadaje się do wykorzystywania jako setup do tworzenia bardziej złożonych API w celach
+                        produkcyjnych. Dzięki przemyśleniu wielu problemów pozwala stworzyć nowe API z zupełnie innym
+                        zestawem danych w krótkim czasie. Ponadto łączenie z bazą danych niesamowicie ułatwione z powodu
+                        przypisaniu zawartości obecnej proto-bazy danych do jednej zmiennej, gdzie wystarczy podstawić
+                        wynik pobierania danych z prawdziwej bazy danych, by uzyskać pełnoprawne API.
+                    </p>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        Dzielenie się wiedzą
+                    </h4>
+                    <p class="item__description">
+                        Szczegółowy opis całego projektu wraz z dokładnym opisem struktury plików może posłużyć innym
+                        początkującym programistom zrozumieć działanie node.js oraz sposobów na rozwiązywanie problemów
+                        przy tworzeniu api.
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="section">
+        <header class="section__head">
+            <h3 class="section__title">Możliwości rozwoju</h3>
+            <p class="section__subtitle">W tej sekcji wyjaśnione zostały potencjalnie interesujące sposoby wykorzystania
+                projektu jako setup'u do budowy bardziej złożonych projektów.</p>
+        </header>
+        <div class="section__content">
+            <ul class="section__list">
+                <li class="item">
+                    <h4 class="item__title">
+                        Dodanie bazy danych MongoDB
+                    </h4>
+                    <p class="item__description">
+                        Poprzez zastąpienie pliku usersDb.json bazą danych MongoDB możemy stworzyć API, które będzie
+                        wykorzystywało całe backendowe zaplecze z popularnego stacku MERN. Dzięki tej prostocie świetnie
+                        nadaje się do nauki MongoDB oraz do tworzenia projektów do portfolio początkujących
+                        programistów.
+                    </p>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        Deploy na Heroku
+                    </h4>
+                    <p class="item__description">
+                        Dzięki uprzejmości Heroku możemy w prosty sposób opublikować stworzoną przez nas aplikację
+                        zupełnie za darmo i pochwalić się efektem swojej pracy, albo sprawdzić działanie aplikacji w
+                        środowisku produkcyjnym bez ponoszenia kosztów.
+                    </p>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        Stworzenie pełnej aplikacji w stacku MERN
+                    </h4>
+                    <p class="item__description">
+                        Przebudowa aplikacji opartej na silniku handlebars w kierunku aplikacji zbudowanej na bibliotece
+                        React stanowi duże wyzwanie i wymaga dużego nakładu pracy, ale pozwala uprościć nam pracę i
+                        ograniczyć ilość energii włożną w tworzenie podstawowego backendowego setup'u. Stworzenie
+                        aplikacji w stacku MERN z nieniejszego projektu może stanowić świetne wyzwanie dla
+                        początkujących programistów, którzy poszukują wyzwań szkoleniowych.
+                    </p>
+                </li>
+                <li class="item">
+                    <h4 class="item__title">
+                        Budowa lokalnego narzędzia
+                    </h4>
+                    <p class="item__description">
+                        Dzięki rozwiązaniu wszystkich podstawowych operacji CRUD, projekt nadaje się świetnie do
+                        zrobieia aplikacji wspomagającej codzienne życie. Można wykorzystać ją do budowy aplikacji
+                        monitorującej budżet, śledzenia postępów swojej pracy (na wzór tablic Kanban) albo zwyczajnego
+                        zapisu notatek, czy pomysłów na przyszłe wpisy na blogu.
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="section">
+        <header class="section__head">
+            <h3 class="section__title">Kontakt</h3>
+        </header>
+        <div class="section__content">
+            <p class="section__description">
+                Jeżeli jesteś rekruterem, który szuka developera, nie wahaj się napisać na linkedinie (link w imieniu w
+                stopce) albo na adres mailowy. Chętnie podejmę się wykoania testowego projektu, jeżli tylko masz ciekawą
+                ofertę pracy.
+            </p>
+            <p class="section__description">
+                Jeżeli jesteś bardziej doświadczonym programistą i masz jakieś uwagi nie wahaj się napisać pod mój adres
+                mailowy w stopce. W końcu nie myli się tylko ten, kto nic nie robi.
+            </p>
+            <p class="section__description">
+                Jeżeli jesteś mniej doświadczonym programistą i masz jakieś pytania, to również nie wahaj się i ślij
+                pytania. My juniorzy nie mamy dzisiaj lekko, więc jeżeli mógłbym w czymś pomóc to zrobię to z
+                przyjemnością.
+            </p>
+        </div>
+</main>
