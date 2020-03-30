@@ -42,6 +42,12 @@ body {
       transform: scale(1.1);
     }
   }
+  &__nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
 }
 .main {
   padding: 20px;
@@ -69,6 +75,20 @@ body {
   }
   &__items {
     margin: $spacing-sm;
+  }
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    font-size: $font-lg;
+    color: $highlight-dark;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      color: $highlight-light;
+    }
+    &--icon {
+      width: 30px;
+      height: auto;
+    }
   }
   .commands {
     margin-top: $spacing-lg;

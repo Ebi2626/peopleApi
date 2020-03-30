@@ -51,6 +51,11 @@ body {
     transition: transform 0.3s ease-in-out; }
     .header__button:hover {
       transform: scale(1.1); }
+  .header__nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center; }
 
 .main {
   padding: 20px;
@@ -75,6 +80,17 @@ body {
     margin-bottom: 30px; }
   .main__items {
     margin: 10px; }
+  .main__back {
+    display: inline-flex;
+    align-items: center;
+    font-size: 2rem;
+    color: #04050f;
+    transition: all 0.3s ease-in-out; }
+    .main__back:hover {
+      color: #b1cedf; }
+    .main__back--icon {
+      width: 30px;
+      height: auto; }
   .main .commands {
     margin-top: 20px; }
     .main .commands__title {

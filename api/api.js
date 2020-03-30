@@ -6,13 +6,10 @@ const router = express.Router();
 router.get("/users", function(req, res) {
   res.json(users.list());
 });
-router.post("/users", function(req, res) {
-  res.json(users.list());
-});
 router.get("/user/:id", function(req, res) {
   res.json(users.get(req.params.id));
 });
-router.post("/user/:id", function(req, res) {
+router.post("/users", function(req, res) {
   res.json(users.add(req.body));
 });
 router.put("/user/:id", function(req, res) {

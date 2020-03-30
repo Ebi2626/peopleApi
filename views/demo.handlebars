@@ -1,0 +1,245 @@
+<header class="header" data-title={{url}}>
+    <h1 class="header__title">{{title}}</h1>
+    <div class="header__description">
+        <p>Tutaj możesz wypróbować działanie API bez korzystania z Postmana czy sięgania po kod. Pod przyciskami
+            ukrywają się funkcje wykorzystujące axiosa do wykonywania zapytań do api. Po wykonaniu zapytania zwracane są
+            odpowiednie dane prezentowane w oknie odpowiedzi.</p>
+    </div>
+</header>
+<main class="main">
+    <section class="section">
+        <header class="section__head">
+            <h3 class="section__title">GET</h3>
+            <p class="section__subtitle">W tej sekcji wysyłamy zapytanie z prośbą o zwrócenie pełnej zawartości API albo
+                rekordów o podanym ID. Realizujemy "R" z akronimu CRUD.</p>
+        </header>
+        <div class="content">
+            <h4 class="content__title">Pytanie o pełną zawartość API</h4>
+            <p class="content__subtitle">Adres zapytania:</p>
+            <pre class="content__code">{{url}}/api/users</pre>
+            <button class="content__button" id="getAll" onclick="handleGetAll()">Pobierz całą zawartość</button>
+            <p class="content__responseLabel">Odpowiedź serwera:</p>
+            <div class="content__response" id="retriveAll"></div>
+        </div>
+        <div class="content">
+            <h4 class="content__title">Pytanie o pełną pojedynczy rekord z API</h4>
+            <label>Wybierz Id pobieranego rekordu
+                <input type="number" id="getOneId" onchange="handleChanging()" /></label>
+            <p class="content__subtitle">Adres zapytania:</p>
+            <pre class="content__code" id="getOneCode">{{url}}/api/user/5</pre>
+            <button class="content__button" id="getOne" onclick="handleGetOne()">Pobierz użytkownika</button>
+            <p class="content__responseLabel">Odpowiedź serwera:</p>
+            <div class="content__response" id="retriveOne"></div>
+        </div>
+        <script>
+            function handleGetAll() {
+                const url = document.querySelector(".header").getAttribute("data-title");
+                const base = document.querySelector("#retriveAll");
+                const urlRequest = url + "/api/users";
+                const el = document.createElement("div");
+                // Make a request for a user with a given ID
+                axios.get(urlRequest)
+                    .then(function (response) {
+                        var jsonOb = response.data;
+                        for (let i = 0; i < jsonOb.length; i++) {
+                            const el = document.createElement("li");
+                            el.innerText = `${jsonOb[i].name} ${jsonOb[i].lastName}`;
+                            base.appendChild(el);
+                        }
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        base.innerText = error.message;
+                    })
+            }
+            function handleChanging() {
+                const url = document.querySelector(".header").getAttribute("data-title");
+                const codeChangingValue = document.querySelector("#getOneId").value;
+                const codeChanging = document.querySelector("#getOneCode");
+                let codeChangingText = url + "/api/user/5";
+                let newCodeChangingText = codeChangingText.substr(0, codeChangingText.length - 1) + codeChangingValue;
+                codeChanging.innerText = newCodeChangingText;
+            }
+            function handleGetOne() {
+                const url = document.querySelector(".header").getAttribute("data-title");
+                const codeChangingValue = document.querySelector("#getOneId").value;
+                const baseOne = document.querySelector("#retriveOne");
+                const urlRequestOne = url + "/api/user/" + codeChangingValue;
+                const el = document.createElement("div");
+                // Make a request for a user with a given ID
+                axios.get(urlRequestOne)
+                    .then(function (response) {
+                        let jsonOb = response.data;
+                        const el = document.createElement("div");
+                        el.innerText = `${jsonOb.name} ${jsonOb.lastName}`;
+                        baseOne.innerText = `${jsonOb.name} ${jsonOb.lastName}`;
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        baseOne.innerText = error.message;;
+                    })
+            }
+        </script>
+    </section>
+    <section class="section">
+        <header class="section__head">
+            <h3 class="section__title">POST</h3>
+            <p class="section__subtitle">W tej sekcji wysyłamy dane potrzebne do utworzenia nowego użytkownika/rekordu.
+                W ciele zapytania musimy przekazać obiekt o kluczach "name" oraz "lastName". Id zostanie nadane
+                automatycznie.</p>
+        </header>
+        <div class="content">
+            <h4 class="content__title">Dodanie nowego użytkownika</h4>
+            <p class="content__subtitle">Adres zapytania:</p>
+            <pre class="content__code">{{url}}/api/users</pre>
+            <form class="form">
+                <h4 class="form__title">Zawartość ciała zapytania metodą POST</h4>
+                <label>Imię dodawanego użytkownika:
+                    <input type="text" id="name" name="name" placeholder="Wprowadź imię..."></label>
+                <label>Nazwisko dodawanego użytkownika:
+                    <input type="text" id="lastName" name="lastName" placeholder="Wprowadź nazwisko..."></label>
+                <button class="content__button" type="button" id="addOne" onclick="handlePost()">Dodaj
+                    użytkownika</button>
+            </form>
+            <p class="content__responseLabel">Odpowiedź serwera:</p>
+            <div class="content__response" id="retrivePost"></div>
+            <script>
+                function handlePost() {
+                    const name = document.querySelector("#name").value,
+                        lastName = document.querySelector("#lastName").value,
+                        basePost = document.querySelector("#retrivePost"),
+                        url = document.querySelector(".header").getAttribute("data-title"),
+                        urlRequestPost = url + "/api/users";
+                    if (name && lastName) {
+                        axios.post(urlRequestPost, {
+                            name: name,
+                            lastName: lastName
+                        })
+                            .then(function (response) {
+                                let jsonOb = response.data;
+                                const el = document.createElement("div");
+                                el.innerText = `${jsonOb.name} ${jsonOb.lastName}`;
+                                basePost.innerText = `${jsonOb.name} ${jsonOb.lastName}`;
+                            })
+                            .catch(function (error) {
+                                // handle error
+                                basePost.innerText = error.message;
+                            })
+                    } else {
+                        basePost.innerText = "Musisz wprowadzić imię i nazwisko osoby dodawanej.";
+                    }
+
+
+                }
+            </script>
+        </div>
+    </section>
+    <section class="section">
+        <header class="section__head">
+            <h3 class="section__title">PUT</h3>
+            <p class="section__subtitle">W tej sekcji poprawiamy istniejący już rekord poprzez zmianę jego parametrów.
+                Można podać wybrany parametr albo obydwa.
+            </p>
+        </header>
+        <div class="content">
+            <h4 class="content__title">Poprawa danych</h4>
+            <p class="content__subtitle">Adres zapytania:</p>
+            <pre class="content__code" id="putText">{{url}}/api/user/5</pre>
+            <form class="form">
+                <h4 class="form__title">Zawartość ciała zapytania metodą PUT</h4>
+                <label>Id poprawianego użytkownika
+                    <input type="number" id="id" name="id" onchange="handlePutChanging()"></label>
+                <label>Nowe imię użytkownika:
+                    <input type="text" id="newName" name="newName" placeholder="Wprowadź poprawione imię..."></label>
+                <label>Nazwisko dodawanego użytkownika:
+                    <input type="text" id="newLastName" name="newLastName"
+                        placeholder="Wprowadź poprawione nazwisko..."></label>
+                <button class="content__button" type="button" id="fixOne" onclick="handlePut()">Popraw
+                    użytkownika</button>
+            </form>
+            <script>
+                function handlePut() {
+                    const name = document.querySelector("#newName").value,
+                        lastName = document.querySelector("#newLastName").value,
+                        id = document.querySelector("#id").value,
+                        url = document.querySelector(".header").getAttribute("data-title"),
+                        basePut = document.querySelector("#retriveFix"),
+                        urlRequestPut = url + "/api/user/" + id;
+
+                    axios.put(urlRequestPut, {
+                        name: name,
+                        lastName: lastName
+                    })
+                        .then(function (response) {
+                            let jsonOb = response.data;
+                            const el = document.createElement("div");
+                            basePut.innerText = `${jsonOb.name} ${jsonOb.lastName}`;
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            basePut.innerText = error.message;
+                        })
+                }
+                function handlePutChanging() {
+                    const url = document.querySelector(".header").getAttribute("data-title");
+                    const urlRequestPut = url + "/api/user/5";
+                    const putChangingValue = document.querySelector("#id").value;
+                    const putChanging = document.querySelector("#putText");
+                    let newCodeChangingText = urlRequestPut.substr(0, urlRequestPut.length - 1) + putChangingValue;
+                    putChanging.innerText = newCodeChangingText;
+                }
+            </script>
+            <p class="content__responseLabel">Odpowiedź serwera:</p>
+            <div class="content__response" id="retriveFix"></div>
+        </div>
+    </section>
+    <section class="section">
+        <header class="section__head">
+            <h3 class="section__title">DELETE</h3>
+            <p class="section__subtitle">W tej sekcji usuwamy rekord poprzez podanie jego ID.
+            </p>
+        </header>
+        <div class="content">
+            <h4 class="content__title">Usunięcie rekordu</h4>
+            <p class="content__subtitle">Adres zapytania:</p>
+            <pre class="content__code" id="changingTextDel">{{url}}/api/user/5</pre>
+            <form class="form">
+                <h4 class="form__title">Usuwany użytkownik</h4>
+                <label>Id usuwanego użytkownika
+                    <input type="number" id="idDel" name="idDel" onchange="handleDelChanging()"></label>
+                <input class="content__button" type="button" id="delOne" value="Usuń użytkownika"
+                    onclick="handleDel()"></input>
+            </form>
+            <script>
+                function handleDel() {
+                    const idDel = document.querySelector("#idDel").value;
+                    const url = document.querySelector(".header").getAttribute("data-title");
+                    const urlRequestDel = url + "/api/user/" + idDel;
+                    const baseDel = document.querySelector("#retriveDel");
+                    axios.delete(urlRequestDel)
+                        .then(function (response) {
+                            let jsonOb = response.data;
+                            const el = document.createElement("div");
+                            baseDel.innerText = `${jsonOb.name} ${jsonOb.lastName}`;
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            baseDel.innerText = error.message;
+                        })
+
+                }
+                function handleDelChanging() {
+                    const url = document.querySelector(".header").getAttribute("data-title");
+                    const urlRequestDel = url + "/api/user/5";
+                    const delChangingValue = document.querySelector("#idDel").value;
+                    const delChanging = document.querySelector("#changingTextDel");
+                    let newCodeChangingText = urlRequestDel.substr(0, urlRequestDel.length - 1) + delChangingValue;
+                    delChanging.innerText = newCodeChangingText;
+                }
+            </script>
+            <p class="content__responseLabel">Odpowiedź serwera:</p>
+            <div class="content__response" id="retriveDel"></div>
+        </div>
+        <a class="main__back" href={{before}}><img class="main__back--icon" src="/icon/chevron-left-solid.svg">Wróć</a>
+    </section>
+</main>

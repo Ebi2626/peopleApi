@@ -19,7 +19,8 @@ app.get("/", function(req, res) {
     title: "People API",
     users: users.list(),
     next:
-      req.protocol + "://" + req.get("host") + req.originalUrl + "o-aplikacji"
+      req.protocol + "://" + req.get("host") + req.originalUrl + "o-aplikacji",
+    demo: req.protocol + "://" + req.get("host") + req.originalUrl + "demo"
   });
 });
 app.get("/o-aplikacji", function(req, res) {
@@ -35,7 +36,17 @@ app.get("/o-aplikacji", function(req, res) {
     before: beforeUrl
   });
 });
+app.get("/demo", function(req, res) {
+  const url = req.protocol + "://" + req.get("host");
+  const beforeUrl = (url + req.originalUrl).replace("/demo", "");
+  res.render("demo", {
+    url: url,
+    demo: true,
+    title: "Demo",
+    before: beforeUrl
+  });
+});
 
 app.listen(process.env.PORT || 80, function() {
-  console.log("Serwer został uruchomiony pod adresem https://localhost:80");
+  console.log("Serwer został uruchomiony");
 });
