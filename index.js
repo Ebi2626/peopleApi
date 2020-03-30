@@ -37,7 +37,7 @@ app.get("/o-aplikacji", function(req, res) {
   });
 });
 app.get("/demo", function(req, res) {
-  const url = req.protocol + "://" + req.get("host");
+  const url = "https://" + req.get("host");
   const beforeUrl = (url + req.originalUrl).replace("/demo", "");
   res.render("demo", {
     url: url,
