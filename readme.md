@@ -1,6 +1,6 @@
 # People API
 
-Simple REST API with people list
+Simple REST API with people list. You can see demo [here](https://peoplelistapi.herokuapp.com/)
 
 ## Getting Started
 
