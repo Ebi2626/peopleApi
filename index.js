@@ -4,13 +4,13 @@ const bodyParser = require("body-parser");
 const users = require("./users");
 const api = require("./api");
 const app = express();
+const cors = require('cors');
 
-app.engine("handlebars", hbs({ defaultLayout: "main" }));
+app.use(cors());
+app.engine("handlebars", hbs.engine({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-
 app.use(express.static("public"));
 app.use(bodyParser.json());
-
 app.use("/api", api);
 
 app.get("/", function(req, res) {
@@ -37,7 +37,7 @@ app.get("/o-aplikacji", function(req, res) {
   });
 });
 app.get("/demo", function(req, res) {
-  const url = "https://" + req.get("host");
+  const url = req.protocol + "://" + req.get("host");
   const beforeUrl = (url + req.originalUrl).replace("/demo", "");
   res.render("demo", {
     url: url,

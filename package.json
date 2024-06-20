@@ -1,6 +1,6 @@
 {
   "name": "people-api",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Simple rest API with list of people with their names and lastNames",
   "main": "index.js",
   "scripts": {
@@ -11,10 +11,11 @@
   "author": "Edwin Harmata",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.2",
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
-    "express-handlebars": "^3.0.0",
-    "node-sass": "^4.13.1"
+    "axios": "^1.7.2",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.3",
+    "node-sass": "^9.0.0"
   }
 }

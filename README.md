@@ -1,10 +1,8 @@
 # People API
 
-Simple REST API with people list. You can see demo [here](https://peoplelistapi.herokuapp.com/)
+Simple REST API with list of people.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+## Usage 
 
 This API can show you simple website with list of people and return json objects with singular person or whole array with people.
 
@@ -47,6 +45,9 @@ PUT method: /api/user/5 - needs in "body" object with one or both keys: name or 
 - Deletin records (DELETE) - delete from CRUD acronym
 
 DELETE method: /api/user/5 - will delete user with given id
+
+## Getting started
+
 
 ### Prerequisites
 
